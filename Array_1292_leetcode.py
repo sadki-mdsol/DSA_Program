@@ -7,6 +7,7 @@
 
 
 def concatArray(nums):
+    #shallow Copy
     ans = nums.copy()
 
     for n in nums:
