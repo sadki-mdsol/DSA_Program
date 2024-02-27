@@ -78,9 +78,11 @@ class Linked_List:
             if temp.address== None:
                 print("ERROR: Index out of range")
                 return
-            remove_node = temp.address
-            temp.address = remove_node.address
-            del remove_node
+            temp.address = (temp.address).address
+            del temp
+            # remove_node = temp.address
+            # temp.address = remove_node.address
+            # del remove_node
 
 if __name__ == '__main__':
     ll = Linked_List()
