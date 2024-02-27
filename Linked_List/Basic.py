@@ -65,17 +65,38 @@ class Linked_List:
                     temp = temp.address
                 temp.address = node
 
+    def insert_at_perticular_index(self,loc,new_node):
+        if loc < 0:
+            print("ERROR: Index out of range")
+            return
+        if loc == 0:
+            self.indert_at_begin(new_node)
+        else:
+            index = 0
+            temp = self.head
+            while index+1 != loc and temp.address != None:
+                temp = temp.address
+                index = index+1 
+            if temp.address== None:
+                print("ERROR: Index out of range")
+                return
+            new_node.address = temp.address
+            temp.address = new_node
+
+
     def remove_element_at_index(self,index_remove):
         temp = self.head
         index = 0
-
+        if index_remove < 0:
+            print("ERROR: Index out of range")
+            return
         if index == index_remove:
             self.delete_at_begin()
         else:
-            while index+1 != index_remove and temp.address!= None:
+            while index+1 != index_remove and temp!= None:
                 temp = temp.address
                 index = index+1
-            if temp.address== None:
+            if temp.address== None and index+1 != index_remove:
                 print("ERROR: Index out of range")
                 return
             temp.address = (temp.address).address
@@ -88,7 +109,7 @@ if __name__ == '__main__':
     ll = Linked_List()
 
     choice = 0
-    while choice!=7:
+    while choice!=8:
         print("Menu:------")
         print("1: Insert at Begin:------")
         print("2: Insert at End:------")
@@ -96,11 +117,12 @@ if __name__ == '__main__':
         print("4: Delete End:------")
         print("5: Create a Linked List from Array")
         print("6: Remove Element at Index")
-        print("7: Exit")
+        print("7: Insert at Perticualr Index:------")
+        print("8: Exit")
 
         print("Please Enter Choice....")
         choice = int(input())
-        if ll.check_empty() and choice not in (1,2,5,6):
+        if ll.check_empty() and choice not in (1,2,5,6,8):
             print("Empty Linked List")
             print("ERROR: Insert Element before Deleting....")
         else:
@@ -132,6 +154,13 @@ if __name__ == '__main__':
                 print("Enter the index you want to remove from LL")
                 index = int(input())
                 ll.remove_element_at_index(index)
+                ll.traverse()
+            elif choice == 7:
+                ll.traverse()
+                print("Enter Index at which location the node to be inserted")
+                loc = int(input())
+                temp = ll.create_temp_node()
+                ll.insert_at_perticular_index(loc,temp)
                 ll.traverse()
 
 
