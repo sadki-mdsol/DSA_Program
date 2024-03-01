@@ -26,6 +26,13 @@ class HashTable:
         for key,value in enumerate(self.my_arr[index]):
             if value[0] == search_key:
                 return value[1]
+            
+    def delete_key(self,del_key):
+        index = self.get_hash(del_key)
+        for key,val in enumerate(self.my_arr[index]):
+            if val[0] == del_key:
+                del self.my_arr[index][key] #if we delete keyt then value will be removed tfrom the hash
+        print(self.my_arr)
     
 if __name__ == '__main__':
     ht = HashTable()
@@ -39,13 +46,14 @@ if __name__ == '__main__':
     # print(ht['march 9'])
 
     choice = 0
-    while choice != 4:
+    while choice != 5:
         print(ht.my_arr)
         print("Menu:-----")
         print("1 : Insert:-----")
         print("2 : Get:-----")
         print("3 : Update:-----")
-        print("4 : Exit:-----")
+        print("4 : Delete....")
+        print("5 : Exit:-----")
 
         print("Enter choice")
         choice = int(input())
@@ -67,3 +75,7 @@ if __name__ == '__main__':
             print("Enter Value")
             value = input()
             ht[key]=value
+        if choice == 4 :
+            print("Enter Key")
+            key = input()
+            ht.delete_key(key)
