@@ -21,9 +21,11 @@ class HashTable:
         if not found:
             self.my_arr[index].append((key,value))
         
-    def __getitem__(self,key):
-        index = self.get_hash(key)
-        return self.my_arr[index]
+    def __getitem__(self,search_key):
+        index = self.get_hash(search_key)
+        for key,value in enumerate(self.my_arr[index]):
+            if value[0] == search_key:
+                return value[1]
     
 if __name__ == '__main__':
     ht = HashTable()
