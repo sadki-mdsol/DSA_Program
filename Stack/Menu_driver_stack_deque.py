@@ -22,19 +22,26 @@ class Stack:
 
     def getContainerEle(self):
         print(self.container)
+    
+    def peek(self):
+        if self.isempty() == 'Stack is empty':
+            return "Stack is Empty"
+        else:
+            return self.container[-1]
 
 if __name__ =='__main__':
     stack = Stack()
 
     choice = 0
-    while choice!=6:
+    while choice!=7:
         print("Menu")
         print("1: Push")
         print("2: Pop")
         print("3: Is Empty")
         print("4: Get Length")
         print("5: Display")
-        print("6: Exit")
+        print("6: Peek (display last element on stack)")
+        print("7: Exit")
 
         print("Enter Choice")
         choice = int(input())
@@ -59,3 +66,7 @@ if __name__ =='__main__':
         elif choice == 5:
             print("Elements of stack are.....")
             print(stack.getContainerEle())
+        
+        elif choice == 6:
+            print("Last Element of stack are.....")
+            print(stack.peek())
