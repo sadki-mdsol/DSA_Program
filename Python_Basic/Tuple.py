@@ -1,5 +1,8 @@
 tup = (12,14,12,16) #value can't be changed
 
+(a1,b1,*c1) = tup
+
+print(a1,b1,c1)
 print(tup[-1])
 print(tup[0])
 

@@ -35,7 +35,9 @@ print(nums)
 
 nums.extend([1,2,3,70])
 print(nums)
+(a1,*b1,c1) = nums
 
+print(a1,b1,c1)
 print(min(nums))
 print(max(nums))
 print(sum(nums))
