@@ -1,43 +1,33 @@
-nums = []
-nums = [10,44,75,100,55,80]
-print(nums)
+from array import *
 
-print(nums[0])
-print(nums[-1])
-print(nums[0:])
-print(nums[:])
-print(nums[:10]) #will not throw error
+val = array('i',[10,20,30,100])
 
+new_arr = array(val.typecode,(a for a in val ))
 
-nums[0] = 20
-print(nums)
+print(new_arr)
+print(val)
 
-num_diff = [80,'Sneha',7.5]
-print(num_diff)
+print(val.index(10))
 
-array_in_array=[num_diff,nums]
-print(array_in_array)
+print(val.buffer_info())
 
+print(val[0])
 
-#build in fucnitons
+for i in range(4):
+    print(val[i])
 
-nums.append(404)
-print(nums)
+print("-----")
 
-nums.insert(5,404) #404 will insert at index 5
-print(nums)
+for i in range(len(val)):
+    print(val[i])
 
-nums.pop()
-print(nums)
+print("-----")
+for e in val:
+    print(e)
 
-nums.pop(3) #here opo with index will remoev that index value
-print(nums)
+# charachetr
+chr = array('u',['a','b','i'])
 
-nums.extend([1,2,3,70])
-print(nums)
-(a1,*b1,c1) = nums
-
-print(a1,b1,c1)
-print(min(nums))
-print(max(nums))
-print(sum(nums))
+print(chr)
+for e in chr:
+    print(e)
