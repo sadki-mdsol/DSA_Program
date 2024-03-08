@@ -29,3 +29,11 @@ def openAccount(name,age=10):
 
 openAccount("Sneha",30)
 openAccount("Vijay")
+
+
+def persion(name,**data):
+    print(name)
+    for k,v in data.items():
+        print(k,"-->",v)
+
+persion("Sneha",age='30',city='Mumbai',m_no=98765)
