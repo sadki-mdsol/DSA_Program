@@ -1,7 +1,7 @@
 #import calc 
 #calc.add(10,7)
 
-from Calc import *
+from Python_Basic.Modules.Calc import *
 
 print("Add is form another module {}".format(add (10,7)))
 print("Multiplication is {}".format(mul (10,7)))
