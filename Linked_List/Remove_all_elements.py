@@ -44,7 +44,7 @@ class Solution:
         if temp.val == val:
             self.head = None
 
-[1,2,6,3,4,5,6]
+# [1,2,6,3,4,5,6]
 
 l1 = ListNode(1)
 l2 = ListNode(2)
