@@ -8,7 +8,9 @@ def selection_sort(arr):
         temp = arr[i]
         arr[i] = arr[min]
         arr[min] = temp
+        print(arr)
 
+    print("Final Output------")
     print(arr)
 
 selection_sort([5,3,8,6,7,2])
