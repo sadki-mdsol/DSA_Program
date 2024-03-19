@@ -78,7 +78,14 @@
 
         </div>
       </div>
-      
+      {% for dest in dests %}
+      {% if dest.offer %}
+      <div>Offer Avaialbale</div>
+      {% endif %}
+      <h2>Place Name: {{dest.name}}</h2><br>
+      <h2>Place Decription: {{dest.discription}}</h2><br>
+      <h2>Place Price: {{dest.price}}</h2><br>
+      {%endfor%}
     </header>
 
     <div class="hero" style='background-image: url("static/images/hero_1.jpg");'></div>
@@ -90,5 +97,6 @@
     <script src="{% static 'js/bootstrap.min.js' %} "></script>
     <script src="{% static 'js/jquery.sticky.js' %} "></script>
     <script src="{% static 'js/main.js' %} "></script>
+
   </body>
 </html>

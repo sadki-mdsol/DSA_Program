@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "Website_menu.apps.WebsiteMenuConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -80,6 +81,16 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": 'telusko',
+#         "USER": "patientdsapie7ee",
+#         "PASSWORd":"f13dcedcc565bd8af6e29b46d697dace",
+#         "HOST" :"localhost"
+#     }
+# }
 
 
 # Password validation
