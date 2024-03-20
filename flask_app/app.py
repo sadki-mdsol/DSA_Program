@@ -1,7 +1,9 @@
-from flask import Flask,jsonify,request,redirect,url_for
+from flask import Flask,jsonify,request,redirect,url_for,session
 
 app = Flask(__name__)
 
+app.config['DEBUG'] = True
+app.config['SECRET_KEY'] ='thisissecretkey'
 # @app.route('/<name>')
 # def index_name(name):
 #     return '<h1>Hello {}!</h1>'.format(name)
@@ -9,6 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+
     return '<h1>Hello World !</h1>'
 
 #set default value to /home
@@ -82,5 +85,25 @@ def user():
         #     {} is at location {}</h1>
         #     '''.format(name,location)
 
+@app.route('/sesssion')
+def set_session():
+    session['name'] = 'Sneha'
+    return '<h1> In session we have {}</h1>'.format(session['name'] )
+
+@app.route('/getsesssion')
+def get_session():
+    if 'name' in session:
+        name = session['name']
+    else: 
+        name = "'Nothing in Session'"
+    return '<h1> From session we have name as {}</h1>'.format( name)
+
+
+@app.route('/popsesssion')
+def pop_session():
+    session.pop('name',None)
+    
+    return 'Popped from session'
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
