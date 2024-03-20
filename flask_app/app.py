@@ -53,6 +53,15 @@ def disply_details():
         {} is at location {}</h1>
         '''.format(name,location)
 
+#get the data from json for POST req
+@app.route('/processjson',methods = ['POST'])
+def process_json_post():
+    data = request.get_json()
+    name = data['name']
+    location = data['location']
+    languages = data['languages']
+
+    return jsonify({'result':'Success!...','name':name,'location':location,'first_language':languages[1],'Languages known':languages,'complete_data':data})
 
 if __name__ == '__main__':
     app.run(debug=True)
