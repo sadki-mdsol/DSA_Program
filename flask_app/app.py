@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request,redirect,url_for
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def index():
 
 
 #bind type to /home/<int:name> <string:name>
-@app.route('/home/<int:name>',methods = ['POST','GET'])
+@app.route('/home/<string:name>',methods = ['POST','GET'])
 def home_page(name):
     return '<h1>{} are at home page!.....</h1>'.format(name)
 
@@ -62,6 +62,25 @@ def process_json_post():
     languages = data['languages']
 
     return jsonify({'result':'Success!...','name':name,'location':location,'first_language':languages[1],'Languages known':languages,'complete_data':data})
+
+@app.route('/user',methods=['POST','GET'])
+def user():
+    if request.method == 'GET':
+         return '''
+        <form action='/user' method='POST'>
+            <input type='text' name='name'><br>
+            <input type='text' name='location'><br>
+            <input type='submit' value='Submit'>
+        </from>
+    '''
+    else:
+        name = request.form['name']
+        location = request.form['location']
+        return redirect(url_for('home_page',name=name,location=location))
+        
+        # return '''<h1>
+        #     {} is at location {}</h1>
+        #     '''.format(name,location)
 
 if __name__ == '__main__':
     app.run(debug=True)
