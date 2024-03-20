@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+
+
+<title> 
+    {%block title%}
+    Home Page
+    {%endblock%}
+</title>
+
+
+{%block xyz%}
+{{ super() }}
+You are from the sepearet HTML file
+<h1>{{name}} are at home page!.....</h1>
+
+We are using if condition '{{display}}' some data
+
+{% if display %}
+<h2>We have display value as {{display}} so diplaying</h2>
+{% else %}
+<h2>We have display value as {{display}} so not diplaying</h2>
+{% endif %}
+
+
+<h3>Via For loop to traverse the list</h3>
+{% for x in arr_list%}
+    {{x}} <br>
+{% endfor %}
+
+
+<h3>Via For loop to traverse the  dict of list</h3>
+{% for k in dict_display%}
+    {{k.name}} <br>
+{% endfor %}
+
+
+Load image via url_for()
+
+<img src="{{ url_for('static',filename='image_flask.png')}}">
+
+
+{% include 'included.html'%}
+{%endblock%}

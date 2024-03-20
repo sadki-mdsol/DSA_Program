@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+<html>
+    <head>
+       
+        <title>
+            {%block title%}
+            The Form
+            {%endblock%}
+        </title>
+        
+    </head>
+    Please Enter Details
+    <body>
+        {% block xyz%}
+        {{ super() }}
+        <form action='/user' method='POST'>
+            <input type='text' name='name'><br>
+            <input type='text' name='location'><br>
+            <input type='submit' value='Submit'>
+        </form>
+        {% endblock %}
+    </body>
+</html>

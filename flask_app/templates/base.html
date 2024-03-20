@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+        
+    </head>
+    <body>
+        <h1 style="color:blue">Base Template</h1>
+        {% block xyz%}
+            <h2 style="color:blue"> From child </h2>
+        {% endblock %}
+    </body>
+</html>

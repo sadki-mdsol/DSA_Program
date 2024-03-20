@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request,redirect,url_for,session
+from flask import Flask,jsonify,request,redirect,url_for,session,render_template
 
 app = Flask(__name__)
 
@@ -24,7 +24,9 @@ def index():
 #bind type to /home/<int:name> <string:name>
 @app.route('/home/<string:name>',methods = ['POST','GET'])
 def home_page(name):
-    return '<h1>{} are at home page!.....</h1>'.format(name)
+    arr_list = ['one','two','three','four']
+    dict_display = [{'name':'Sneha'},{'name':'Vijay'}]
+    return render_template('home.html',name=name,display=False,arr_list= arr_list,dict_display = dict_display)
 
 @app.route('/json')
 def json():
@@ -40,13 +42,14 @@ def get_query():
 #create a form & send to process route to display details of form
 @app.route('/form')
 def get_details_form():
-    return '''
-        <form action='/process' method='POST'>
-            <input type='text' name='name'><br>
-            <input type='text' name='location'><br>
-            <input type='submit' value='Submit'>
-        </from>
-    '''
+    return render_template('form.html')
+    # return '''
+    #     <form action='/process' method='POST'>
+    #         <input type='text' name='name'><br>
+    #         <input type='text' name='location'><br>
+    #         <input type='submit' value='Submit'>
+    #     </from>
+    # '''
 
 @app.route('/process' , methods=['POST'])
 def disply_details():
@@ -74,7 +77,7 @@ def user():
             <input type='text' name='name'><br>
             <input type='text' name='location'><br>
             <input type='submit' value='Submit'>
-        </from>
+        </form>
     '''
     else:
         name = request.form['name']
