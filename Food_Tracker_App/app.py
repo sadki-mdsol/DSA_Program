@@ -31,18 +31,32 @@ def home():
         
         db.execute('insert into log_data(entry_date) values(?)',[final_db_date])
         db.commit()
-    cur = db.execute('select * from log_data order by entry_date desc')
+    cur = db.execute('select log_data.entry_date as entry_date, sum(food.protein) as protein_sum, \
+            sum(food.carbohydrates) as carbs_sum,\
+                 sum(food.fat) as fat_sum,\
+                     sum(food.calories) as cal_sum \
+            from log_data join food_date on food_date.log_date_id = log_data.id  \
+            join food on food.id = food_date.food_id group by log_data.entry_date \
+            order by log_data.entry_date')
     result = cur.fetchall()
-    date_dispaly = []
+    date_result = []
     for i in range(0,len(result)):
-        d = {}
+        dates_value = {}
 
         date = str(result[i]['entry_date'])
         date_time_ob = datetime.strptime(date,'%Y%m%d')
 
-        d['entry_date'] = datetime.strftime(date_time_ob,'%B %d, %y')
-        date_dispaly.append(d)
-    return render_template('home.html',dates = date_dispaly)
+        dates_value['entry_date'] = datetime.strftime(date_time_ob,'%B %d, %y')
+        dates_value['date'] = result[i]['entry_date']
+        dates_value['protein_sum'] = result[i]['protein_sum']
+        dates_value['carbs_sum'] = result[i]['carbs_sum']
+        dates_value['fat_sum'] = result[i]['fat_sum']
+        dates_value['cal_sum'] = result[i]['cal_sum']
+        date_result.append(dates_value)
+
+    
+
+    return render_template('home.html',dates = date_result)
 
 @app.route('/food',methods=['GET','POST'])
 def food():
@@ -94,7 +108,7 @@ def view(date):
         total['carbohydrates'] += each['carbohydrates']
         total['calories'] += each['calories']
 
-    return render_template('day.html',current_date = date_display, foods = all_foods,log_results =log_result,total_fats = total)
+    return render_template('day.html',entry_date = result['entry_date'],preety_date = date_display, foods = all_foods,log_results =log_result,total_fats = total)
 
 if __name__ == '__main__':
     app.run(debug=True)
