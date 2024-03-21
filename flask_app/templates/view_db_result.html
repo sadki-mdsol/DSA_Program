@@ -1,0 +1,22 @@
+<h1> Database Result </h1>
+
+<table border='1px solid black'>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Column</th>
+    </tr>
+    
+
+
+
+{% for item in results %}
+    <tr>
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.location}}</td>
+    </tr>
+    
+{% endfor %}
+
+</table>

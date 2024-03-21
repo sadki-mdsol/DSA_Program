@@ -1,6 +1,26 @@
-from flask import Flask,jsonify,request,redirect,url_for,session,render_template
+from flask import Flask,jsonify,request,redirect,url_for,session,render_template,g
+import sqlite3
+# import json
 
 app = Flask(__name__)
+
+
+
+def connect_db():
+    sql = sqlite3.connect('data.db')
+    sql.row_factory=sqlite3.Row
+    return sql
+
+def get_db():
+    if not hasattr(g,'sql_db'):
+        g.sql_db = connect_db()
+    return g.sql_db
+
+@app.teardown_appcontext
+def close_db(error):
+    if hasattr(g,'sql_db'):
+        g.sql_db.close()
+
 
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] ='thisissecretkey'
@@ -9,9 +29,9 @@ app.config['SECRET_KEY'] ='thisissecretkey'
 #     return '<h1>Hello {}!</h1>'.format(name)
 
 
+
 @app.route('/')
 def index():
-
     return '<h1>Hello World !</h1>'
 
 #set default value to /home
@@ -107,6 +127,33 @@ def pop_session():
     session.pop('name',None)
     
     return 'Popped from session'
+
+@app.route('/getuserdetails',methods=['POST','GET'])
+def insert_user_details():
+    if request.method == 'GET':
+         return '''
+        <form action='/getuserdetails' method='POST'>
+            <input type='text' name='name'><br>
+            <input type='text' name='location'><br>
+            <input type='submit' value='Submit'>
+        </form>
+    '''
+    else:
+        name = request.form['name']
+        location = request.form['location']
+        db = get_db()
+        db.execute('insert into users(name,location) values(?,?)',[name,location])
+        db.commit()
+        return redirect(url_for('home_page',name=name,location=location))
+
+
+@app.route('/viewresult')
+def get_result_db():
+    db = get_db()
+    cur = db.execute('select id,name,location from users')
+    results = cur.fetchall()
+    return render_template('view_db_result.html',results=results)
+    
 
 if __name__ == '__main__':
     app.run()
