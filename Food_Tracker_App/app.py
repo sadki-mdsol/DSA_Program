@@ -1,19 +1,9 @@
-from flask import Flask,render_template,g,request
-import sqlite3
+from flask import Flask,render_template,request,g
 from datetime import datetime
+from database import get_db
+
 
 app = Flask(__name__)
-
-
-def connect_db():
-    sql = sqlite3.connect('food_log.db')
-    sql.row_factory = sqlite3.Row
-    return sql
-
-def get_db():
-    if not hasattr(g,'sqlite3_db'):
-        g.sqlite3_db=connect_db()
-    return g.sqlite3_db
 
 @app.teardown_appcontext
 def close_db(error):
@@ -37,7 +27,7 @@ def home():
                      sum(food.calories) as cal_sum \
             from log_data join food_date on food_date.log_date_id = log_data.id  \
             join food on food.id = food_date.food_id group by log_data.entry_date \
-            order by log_data.entry_date')
+            order by log_data.entry_date desc')
     result = cur.fetchall()
     date_result = []
     for i in range(0,len(result)):
