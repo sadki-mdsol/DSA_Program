@@ -25,8 +25,8 @@ def home():
             sum(food.carbohydrates) as carbs_sum,\
                  sum(food.fat) as fat_sum,\
                      sum(food.calories) as cal_sum \
-            from log_data join food_date on food_date.log_date_id = log_data.id  \
-            join food on food.id = food_date.food_id group by log_data.entry_date \
+            from log_data left join food_date on food_date.log_date_id = log_data.id  \
+            left join food on food.id = food_date.food_id group by log_data.entry_date \
             order by log_data.entry_date desc')
     result = cur.fetchall()
     date_result = []
