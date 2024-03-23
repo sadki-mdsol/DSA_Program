@@ -1,6 +1,6 @@
 from flask import g
 import sqlite3
-
+# import psycopg2
 
 def connect_db():
     sql = sqlite3.connect('questions.db')
