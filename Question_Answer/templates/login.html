@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-
+  {%block title %} Login {% endblock %}
   {% block body %}
 
     <div class="page-header">
@@ -12,6 +12,9 @@
             <fieldset>
               <div class="form-group">
                 <label for="inputName" class="col-lg-2 control-label">Name</label>
+                {% if error %}
+                  <div>{{error}}</div>
+                {% endif %}
                 <div class="col-lg-10">
                   <input type="text" class="form-control" name="name" placeholder="Name">
                 </div>

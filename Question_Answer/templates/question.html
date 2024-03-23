@@ -1,12 +1,14 @@
 {% extends 'base.html'%}
 
+{%block title %} Question {% endblock %}
+
   {% block body %}
     
     <div class="jumbotron">
-      <h1>What?</h1>
-      <p>This is the answer.</p>
-      <p><a class="btn btn-primary btn-lg">Asked By: Herbert</a></p>
-      <p><a class="btn btn-primary btn-lg">Answered By: Anthony</a></p>
+      <h1>{{questions_details['question']}}</h1>
+      <p>{{questions_details['answer_text']}}</p>
+      <p><a class="btn btn-primary btn-lg">Asked By: {{questions_details['asker_name']}} </a></p>
+      <p><a class="btn btn-primary btn-lg">Answered By: {{questions_details['expert_name']}} </a></p>
     </div>
 
   {% endblock %}
